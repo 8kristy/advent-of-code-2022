@@ -24,10 +24,6 @@ with open("input", 'r') as f:
 dir_sizes = {}
 total = 0
 
-
-for pre, fill, node in RenderTree(filetree):
-    print("%s%s" % (pre, node.name))
-
 def get_total_size(node):
     total = 0
     for pre, fill, node in RenderTree(node):
@@ -39,7 +35,6 @@ for pre, fill, node in RenderTree(filetree):
         if not node.name.isdigit():
             dir_sizes[node] = get_total_size(node)
 
-print(dir_sizes)
 total = 0
 
 for dir in dir_sizes:
@@ -47,3 +42,10 @@ for dir in dir_sizes:
         total += dir_sizes[dir]
 
 print(total)
+
+remaining_space = 70000000 - dir_sizes[filetree]
+to_delete = 30000000 - remaining_space
+
+sizes = [dir_sizes[x] for x in dir_sizes if dir_sizes[x] >= to_delete]
+
+print(min(sizes))

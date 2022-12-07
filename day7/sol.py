@@ -24,6 +24,10 @@ with open("input", 'r') as f:
 dir_sizes = {}
 total = 0
 
+
+for pre, fill, node in RenderTree(filetree):
+    print("%s%s" % (pre, node.name))
+
 def get_total_size(node):
     total = 0
     for pre, fill, node in RenderTree(node):
@@ -33,8 +37,9 @@ def get_total_size(node):
 
 for pre, fill, node in RenderTree(filetree):
         if not node.name.isdigit():
-            dir_sizes[node.name] = get_total_size(node)
+            dir_sizes[node] = get_total_size(node)
 
+print(dir_sizes)
 total = 0
 
 for dir in dir_sizes:
